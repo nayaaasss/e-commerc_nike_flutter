@@ -100,9 +100,54 @@ class CataloguScreen extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(
-            height: defaultPadding,
+         //banner
+          const SizedBox(height: 30,),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: Border.all(),
+              borderRadius: BorderRadius.circular(10)
+            ),
+            child: Row(
+              children: [
+                const Expanded(
+                  flex: 2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Special Discount!!",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      SizedBox(height: 4,),
+                      Text(
+                        '50% Off~',
+                        style: TextStyle(
+                          color:  Color(0xFF674DC5),
+                          fontSize: 20
+                        ),
+                      )
+                    ],
+                  )
+                  ),
+                  SizedBox(width: 8,),
+                  Expanded(
+                    flex: 1,
+                    child: Image.asset(
+                      "assets/images/Nike_3.png"
+                    ),
+                    )
+              ],
+            ),
           ),
+
+          SizedBox(height: 10,),
+
           const Categories(),
           Expanded(
             child: Padding(
