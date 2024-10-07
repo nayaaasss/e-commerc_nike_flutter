@@ -44,7 +44,7 @@ class _BodyState extends State<Body> {
             Expanded( //untuk mengisi kekososngan yang ada biar proposional
               flex: 4, //untuk memenuhi raung kosong yang ada
               child: SizedBox(
-                width: double.infinity, //membawa widget ke tengah sepeti sumbu x dan y dan di tngh 0.0, mengikuti titik kordinat
+              //membawa widget ke tengah sepeti sumbu x dan y dan di tngh 0.0, mengikuti titik kordinat
                 child: PageView.builder( //untuk menampung/membangun data". mengatur swipe activity" 
                 controller:  _pageController, //untuk mengatur page view
                 onPageChanged: (value) { //mau manggil sebuah argumen, dmn argumen trsbut berfungsi untuk mewakili sebuah data int maka gunakanlah argumen value

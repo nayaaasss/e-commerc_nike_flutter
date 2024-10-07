@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 class SplashContent extends StatelessWidget {
   const SplashContent({
-    super.key, required this.text, required this.image,
+    super.key,
+    required this.text,
+    required this.image,
   });
   final String text, image;
 
@@ -20,14 +22,13 @@ class SplashContent extends StatelessWidget {
             fontSize: getProportionedScreenWidth(30.0),
             fontWeight: FontWeight.w500,
             fontFamily: 'poppins',
-            ),
-            ),
-          Text(
-            text,
-            textAlign: TextAlign.center,
           ),
-         Image.asset(image)
-        
+        ),
+        Text(
+          text,
+          textAlign: TextAlign.center,
+        ),
+        Image.asset(image)
       ],
     );
   }

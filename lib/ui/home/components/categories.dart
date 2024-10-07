@@ -10,10 +10,10 @@ class Categories extends StatefulWidget { //banyak perubahan
 
 class _CategoriesState extends State<Categories> {
   List<String> categories = [
-    "Bag",
-    "Footwear",
-    "Watches",
-    "Dress"
+    "Shoes",
+    "Clothing",
+    "Socks",
+    "Cap"
   ];
   int selectedIndex = 0; //variable untuk kasi tau
 
@@ -40,7 +40,7 @@ class _CategoriesState extends State<Categories> {
           });
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
               Text(

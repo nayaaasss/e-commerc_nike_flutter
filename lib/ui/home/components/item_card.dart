@@ -21,10 +21,28 @@ class ItemCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: product.color,
                 borderRadius: BorderRadius.circular(16),
+                
               ),
-              child: Hero(
-                tag: "${product.id}",
-                child: Image.asset(product.image),
+              child: Stack(
+                children: [ 
+                  Hero(
+                  tag: "${product.id}",
+                  child: Image.asset(product.image),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(6), // Padding untuk ikon
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.7), // Latar belakang dengan opasitas
+                          shape: BoxShape.circle, 
+                ),
+                 child: const Icon(
+                          Icons.favorite_border, 
+                          color: Colors.blue, 
+                          size: 20,
+                        ),
+                ),
+                
+                ],
               ),
             ),
           ),
@@ -37,19 +55,12 @@ class ItemCard extends StatelessWidget {
                   style: const TextStyle(color: textColor),
                 ),  
               ),
-              const Padding(
-                padding: EdgeInsets.only(top:8, left: 30),
-                child: Icon((Icons.favorite_border_outlined)),
-              )
             ],
           ),
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 1.0), 
-                child: Text("\$ ${product.price}",
-                style: const TextStyle(fontWeight: FontWeight.bold, color: textColor),),
-              ),
+              Text("\$ ${product.price}",
+              style: const TextStyle(fontWeight: FontWeight.bold, color: textColor),),
             ],
           ),
         ],

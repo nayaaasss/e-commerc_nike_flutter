@@ -27,24 +27,21 @@ class CataloguScreen extends StatelessWidget {
         ],
         title: const Text(
           "Nike",
-          style: TextStyle(
-            fontSize: 23,
-            fontFamily: 'poppins'
-          ),
-          ),
+          style: TextStyle(fontSize: 23, fontFamily: 'poppins'),
+        ),
       ),
       body: Column(
         children: [
           const Text(
             "Women",
-            textAlign: TextAlign.center,
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-                color: Colors.black),
+                fontWeight: FontWeight.bold, 
+                fontSize: 17, color: 
+                Colors.black
+                ),
           ),
           const SizedBox(
-            height: 10,
+            height: 2,
           ),
           //untuk search bar
           Container(
@@ -58,13 +55,14 @@ class CataloguScreen extends StatelessWidget {
             ),
             decoration: ShapeDecoration(
               color: Colors.white,
-              shape: RoundedRectangleBorder(  //untuk memberi efek rounded
-               borderRadius: BorderRadius.circular(14),
+              shape: RoundedRectangleBorder(
+                //untuk memberi efek rounded
+                borderRadius: BorderRadius.circular(14),
               ),
               shadows: const [
                 BoxShadow(
                   color: Color(0x0A000000),
-                  blurRadius: 2, //ini untuk blur 
+                  blurRadius: 2, //ini untuk blur
                   offset: Offset(0, 4), //ini untuk memberi efek shadow
                   spreadRadius: 2, //untuk memberi efek bayangan
                 )
@@ -73,7 +71,7 @@ class CataloguScreen extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  width: 50, 
+                  width: 50,
                   height: 80,
                   padding: const EdgeInsets.all(8),
                   decoration: ShapeDecoration(
@@ -84,11 +82,10 @@ class CataloguScreen extends StatelessWidget {
                   ),
                   child: const Row(
                     children: [
-                      Icon(
-                        Icons.search_sharp, color: 
-                        Color.fromARGB(255, 255, 238, 7), 
-                        size: defaultPadding //ukuran icon
-                      ),
+                      Icon(Icons.search_sharp,
+                          color: Color.fromARGB(255, 255, 238, 7),
+                          size: defaultPadding //ukuran icon
+                          ),
                     ],
                   ),
                 ),
@@ -98,11 +95,9 @@ class CataloguScreen extends StatelessWidget {
                     color: Color.fromARGB(255, 158, 157, 157),
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
-                   
                   ),
                 ),
               ],
-              
             ),
           ),
           const SizedBox(
