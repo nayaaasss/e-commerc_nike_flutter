@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+// ini adalah satu-satunya acuan untuk data yg digunakan
 class Product {
   final String image, title, description;
   final int price, size, id;
@@ -41,7 +43,7 @@ List<Product> product = [
 
   Product(
     id: 3, 
-    image: 'assets/images/Nike_4.png', 
+    image: 'assets/images/Nike_6.png', 
     title: "Nike Jordan 220", 
     price: 45, 
     description: descriptionText, 
@@ -71,7 +73,7 @@ List<Product> product = [
   
   Product(
     id: 6, 
-    image: 'assets/images/Nike_7.png', 
+    image: 'assets/images/Nike_3.png', 
     title: "Nike Air Max 36", 
     price: 31, 
     description: descriptionText, 

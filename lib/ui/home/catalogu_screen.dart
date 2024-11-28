@@ -1,184 +1,258 @@
 import 'package:e_commerce/consts.dart';
+import 'package:e_commerce/favori/Wishlist_screen.dart';
 import 'package:e_commerce/models/products.dart';
+import 'package:e_commerce/profile/profile_page.dart';
+import 'package:e_commerce/settings/settings_screen.dart';
+import 'package:e_commerce/state-management/wishlist_provider.dart';
+import 'package:e_commerce/ui/cart/cart_screen.dart';
 import 'package:e_commerce/ui/detail/detail_screen.dart';
+import 'package:e_commerce/ui/home/components/bottom_nav_bar.dart';
 import 'package:e_commerce/ui/home/components/categories.dart';
 import 'package:e_commerce/ui/home/components/item_card.dart';
 import 'package:flutter/material.dart';
 
-class CataloguScreen extends StatelessWidget {
+class CataloguScreen extends StatefulWidget {
   const CataloguScreen({super.key});
+  
 
+  @override
+  State<CataloguScreen> createState() => _CataloguScreenState();
+}
+
+class _CataloguScreenState extends State<CataloguScreen> {
+  int _selectedIndex = 0;
+
+
+
+  final List<Widget> _widgetOptions = [ //dasar untuk bernavigasi via bottom nav bar
+    const CataloguScreen(),
+    const WishlistScreen(),
+    const SettingsScreen(),
+    const ProfilePage(),
+    
+  ];
+
+  //function untuk aksi tap pada bottom nav bar
+  void _onItemTapped(int index) {
+    setState(() {
+      /*menyatakan bahwa initial actionnya adalah untuk menampilkan objek yg berada pada index 0*/
+      _selectedIndex = index;
+    });
+  }
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: _selectedIndex == 0 
+      ?AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        elevation: 0, //untuk menghilangkan efek bayangan
+        elevation: 0,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const WishlistScreen(),
+                    ),
+                  );
+            },
             icon: const Icon(Icons.favorite_border_outlined),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+               Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CartScreen(),
+                    ),
+                  );
+            },
             icon: const Icon(Icons.shopping_bag_outlined),
           ),
         ],
-        title: const Text(
-          "Nike",
-          style: TextStyle(fontSize: 23, fontFamily: 'poppins'),
-        ),
-      ),
-      body: Column(
-        children: [
-          const Text(
-            "Women",
-            style: TextStyle(
-                fontWeight: FontWeight.bold, 
-                fontSize: 17, color: 
-                Colors.black
+        title: const Row(
+          children: [
+              CircleAvatar(
+              radius: 20, // Ukuran gambar
+              backgroundImage: AssetImage('assets/images/User 03C.png'), // Path ke gambar lokal
+              // Jika gambar diambil dari internet, gunakan Image.network
+              // backgroundImage: NetworkImage('https://example.com/profile.jpg'),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: defaultPadding),
+              child: Text(
+                textAlign: TextAlign.center,
+                "Welcome",
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 23,
                 ),
-          ),
-          const SizedBox(
-            height: 2,
-          ),
-          //untuk search bar
-          Container(
-            width: 269,
-            height: 52,
-            padding: const EdgeInsets.only(
-              top: 14,
-              left: 16,
-              right: 90,
-              bottom: 10,
-            ),
-            decoration: ShapeDecoration(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                //untuk memberi efek rounded
-                borderRadius: BorderRadius.circular(14),
               ),
-              shadows: const [
-                BoxShadow(
-                  color: Color(0x0A000000),
-                  blurRadius: 2, //ini untuk blur
-                  offset: Offset(0, 4), //ini untuk memberi efek shadow
-                  spreadRadius: 2, //untuk memberi efek bayangan
-                )
-              ],
             ),
-            child: Row(
-              children: [
-                Container(
-                  width: 50,
-                  height: 80,
-                  padding: const EdgeInsets.all(8),
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
+          ],
+        ),
+      )
+      : null,
+      
+      body: _selectedIndex == 0 ? SingleChildScrollView( //kalau misakan selectedindex 0 maka akan memunculkan catalog
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: defaultPadding),
+            // Search bar
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: defaultPadding),
+              padding: const EdgeInsets.only(left: 10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.grey, width: 2),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 50,
+                    height: 50,
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(40),
                     ),
+                    child: const Icon(
+                      Icons.search_outlined,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      size: 26,
+                    ),
                   ),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.search_sharp,
-                          color: Color.fromARGB(255, 255, 238, 7),
-                          size: defaultPadding //ukuran icon
-                          ),
-                    ],
-                  ),
-                ),
-                const Text(
-                  'Looking for shoes',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 158, 157, 157),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
-         //banner
-          const SizedBox(height: 30,),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 15),
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              border: Border.all(),
-              borderRadius: BorderRadius.circular(10)
-            ),
-            child: Row(
-              children: [
-                const Expanded(
-                  flex: 2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Special Discount!!",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold
+                  const SizedBox(width: 10),
+                  const Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Looking for shoes',
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(
+                          color: secondaryColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(height: 4,),
-                      Text(
-                        '50% Off~',
-                        style: TextStyle(
-                          color:  Color(0xFF674DC5),
-                          fontSize: 20
-                        ),
-                      )
-                    ],
-                  )
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                      ),
+                    ),
                   ),
-                  SizedBox(width: 8,),
-                  Expanded(
-                    flex: 1,
-                    child: Image.asset(
-                      "assets/images/Nike_3.png"
-                    ),
-                    )
-              ],
+                ],
+              ),
             ),
-          ),
-
-          SizedBox(height: 10,),
-
-          const Categories(),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: GridView.builder(
-                //untuk menampilkan widget column sama row
-                //main axis selalu mengikut parentsnya, misalkan dia dibungkus sama column maka dia akan mengikuti column
-                itemCount: product
-                    .length, //buat nampilin sesuai data yang ada di model product
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    //mengatur tata letak grid/membungkus (lbh byk opsi dripda slyofer) //dia tuh kyk berlawanan gtu karna cross, klo misalnya dia di warp column trs make cross nnti jdi row, sebaliknya juga gtu
-                    crossAxisCount: 2,
-                    mainAxisSpacing: defaultPadding,
-                    crossAxisSpacing: defaultPadding,
-                    childAspectRatio: 0.75 //
+            const SizedBox(height: 20),
+            // Banner
+        Center(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal, // Agar scroll horizontal
+          child: Row(
+            children: [
+              Container(
+                      margin: EdgeInsets.only(left: 20, right: 10),
+                      child: Image.asset(
+                        'assets/images/Group 1000000799.png',
+                        width: 350,
+                        height: 150,
+                     
+                      ),
                     ),
-                itemBuilder: (context, index) => ItemCard(
-                  //(context) merepersentsikan halaman yang aktif saat ini
-                  product: product[index],
-                  press: () => Navigator.push(
-                      //untuk pindah halaman
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              DetailScreen(product: product[index]))),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Image.asset(
+                        'assets/images/Group 1000000799.png',
+                        width: 350,
+                        height: 150,
+                      
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Image.asset(
+                        'assets/images/Group 1000000799.png',
+                        width: 350,
+                        height: 150,
+                      ),
+                    ),
+                    // Tambahkan gambar lain di sini
+                  ],
                 ),
               ),
             ),
+            const Padding(
+              padding: EdgeInsets.only(
+                left: defaultPadding,
+                right: defaultPadding,
+                top: defaultPadding,
+                bottom: 4
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'categories',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700
+                      ),
+                  ),
+                  Text(
+                    'See all',
+                    style: TextStyle(
+                      color: secondColor,
+                      fontSize: 15,
+                      
+                      ),
+                  ),
+                ],
+              ),
+            ),
+
+            const Categories(),
+            // GridView
+                       // Horizontal Scrollable Grid
+              Padding(
+              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+              child: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: product.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: defaultPadding,
+                  crossAxisSpacing: defaultPadding,
+                  childAspectRatio: 0.75,
+                ),
+                itemBuilder: (context, index) => ItemCard(
+                  product: product[index],
+                  press: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailScreen(product: product[index]),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+       )
+       : _widgetOptions[_selectedIndex], //titik dua itu adalah repersentasi dari ternari operator di flutter, tampilkan widget berdasarkan index
+        bottomNavigationBar: BottomNavBar(
+          selectedIndex: _selectedIndex, 
+          onItemTapped: _onItemTapped,
           )
-        ],
-      ),
     );
   }
-}
+   
+  }
+
+  
+

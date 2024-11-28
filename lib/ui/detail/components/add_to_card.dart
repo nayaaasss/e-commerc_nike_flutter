@@ -1,14 +1,19 @@
 import 'package:e_commerce/consts.dart';
 import 'package:e_commerce/models/products.dart';
+import 'package:e_commerce/state-management/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddToCard extends StatelessWidget {
-  const AddToCard({super.key, required this.product});
+  const AddToCard({super.key, required this.product, required this.quantity});
 
   final Product product;
+  final int quantity;
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: defaultPadding),
       child: Row(
@@ -24,8 +29,23 @@ class AddToCard extends StatelessWidget {
               )
             ),
             child: IconButton(
-              onPressed: () {}, 
-              icon: const Icon(Icons.shopping_cart_outlined)
+              icon: const Icon(Icons.shopping_cart_outlined),
+              onPressed: () {
+
+                cartProvider.addItem(
+                  product.id.toString(), //data type converter
+                  product.title,
+                  product.price,
+                  product.image,
+                  quantity  //quantity terhubung karena adanya addItem
+                );
+                ScaffoldMessenger.of(context).showSnackBar( 
+                  SnackBar(
+                  content: Text('succesfully add ${product.title} added to cart'),
+                  duration: const Duration(seconds: 2),
+                  )
+                );
+              }, 
               ),
           ),
 
@@ -38,7 +58,22 @@ class AddToCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18),
                   )
               ),
-              onPressed: () {}, 
+              onPressed: () {
+
+                cartProvider.addItem(
+                  product.id.toString(),
+                  product.title,
+                  product.price,
+                  product.image,
+                  quantity
+                  );
+                 ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                  content: Text('${product.title} yey kebeli'),
+                  duration: const Duration(seconds: 2),
+                  )
+                );
+              }, 
               child: const Text(
                 "BUY NOW",
                 style: TextStyle(

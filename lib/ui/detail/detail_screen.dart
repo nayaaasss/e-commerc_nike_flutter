@@ -1,4 +1,5 @@
 import 'package:e_commerce/consts.dart';
+import 'package:e_commerce/favori/Wishlist_screen.dart';
 import 'package:e_commerce/models/products.dart';
 import 'package:e_commerce/ui/detail/components/add_to_card.dart';
 import 'package:e_commerce/ui/detail/components/cart_counter.dart';
@@ -15,6 +16,7 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int quantity = 1;
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -24,7 +26,12 @@ class DetailScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
-            onPressed: () {}, 
+            onPressed: () {
+              Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => const WishlistScreen()),
+                );
+            }, 
             icon: const Icon(Icons.favorite_border_outlined)
           ),
           IconButton(
@@ -62,15 +69,17 @@ class DetailScreen extends StatelessWidget {
                         const SizedBox(height: defaultPadding),
                         Description(product: product),
                         const SizedBox(height: defaultPadding),
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CartCounter(),
-                            FavButton()
+                            CartCounter(product: product, onQuantityChanged: (currentQuantity) { 
+                              quantity = currentQuantity;
+                             }),
+                            FavButton(product: product),
                           ],
                         ),
                         const SizedBox(height: defaultPadding),
-                        AddToCard(product: product)
+                        AddToCard(product: product, quantity: quantity)
                       ],
                     ),
                   ),

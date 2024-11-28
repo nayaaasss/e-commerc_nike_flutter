@@ -10,6 +10,7 @@ class SplashContent extends StatelessWidget {
   });
   final String text, image;
 
+  
   @override
   Widget build(BuildContext context) {
     return Column(

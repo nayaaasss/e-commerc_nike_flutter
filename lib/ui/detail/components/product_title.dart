@@ -40,7 +40,7 @@ class ProductTitle extends StatelessWidget {
                   Text(
                     "\$ ${product.price}",
                     style: const TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
+                      color: Colors.green,
                       fontSize: 24,
                       fontWeight: FontWeight.bold
                     ),

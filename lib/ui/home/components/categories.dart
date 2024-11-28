@@ -9,12 +9,21 @@ class Categories extends StatefulWidget { //banyak perubahan
 }
 
 class _CategoriesState extends State<Categories> {
+  //untuk inisialisasi view pager
   List<String> categories = [
     "Shoes",
     "Clothing",
     "Socks",
     "Cap"
   ];
+
+  List<IconData> categoryIcons = [
+    Icons.sports_handball, // Icon untuk Shoes
+    Icons.checkroom, // Icon untuk Clothing
+    Icons.sports_baseball, // Icon untuk Cap
+    Icons.sports_baseball, // Icon untuk Cap
+  ];
+
   int selectedIndex = 0; //variable untuk kasi tau
 
   @override
@@ -22,7 +31,7 @@ class _CategoriesState extends State<Categories> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: defaultPadding),
       child: SizedBox(
-        height: 25,
+        height: 50,
         child: ListView.builder( //untuk membangun dan menampung data yang mau di tampilkan di UI
           scrollDirection: Axis.horizontal, //untuk mengatur arah scrollnya
           itemCount: categories.length,
@@ -40,24 +49,36 @@ class _CategoriesState extends State<Categories> {
           });
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 17),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                categories[index],
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: selectedIndex == index? const Color(0xFF0D6EFD) : secondaryColor
+              Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+             decoration: BoxDecoration(
+              color: selectedIndex == index? Color.fromARGB(255, 111, 168, 255) : Colors.transparent,
+              borderRadius: BorderRadius.circular(12),
+              ),
+                child: Column(
+                  children: [
+                    Icon(
+                    categoryIcons[index], // Icon sesuai kategori
+                    color: selectedIndex == index? Colors.white
+                        : Colors.black,
+                    size: 16, // Ukuran icon
+                  ),
+                    const SizedBox(width: 9),
+                    Text(
+                      categories[index],
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: selectedIndex == index? Colors.white : secondaryColor
+                      ),
+                    ),
+                  ],
                 ),
               ),
-             Container(
-              margin: const EdgeInsets.only(
-               top: 3
-              ),
-              height: 2,
-              width: 50,
-              color: selectedIndex == index ? const Color(0xFF0D6EFD) : secondaryColor,
-             )
+            
             ],
           ),
         ),

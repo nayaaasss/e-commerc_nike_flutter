@@ -1,4 +1,5 @@
 import 'package:e_commerce/consts.dart';
+import 'package:e_commerce/ui/Auth/login_screen.dart';
 import 'package:e_commerce/ui/home/catalogu_screen.dart';
 import 'package:e_commerce/ui/splash/components/splash_content.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _BodyState extends State<Body> {
   //   10, (index) => "Product ${index + 1}" //untuk membuat wadah product/generate product
   //   );
 
-//dasar pengambilan data dari API
+//dasar pengambilan data dari API, karena format json key dan value
   List<Map<String, String>> splashData = [
     {
       "text": "Smart, Gorgeous & Fashionable \nCollection Explor Now",
@@ -57,11 +58,12 @@ class _BodyState extends State<Body> {
                   itemBuilder: (context, index) => SplashContent( //banyak data, baawaan
                     text: splashData[index]['text']!, //bank operator (important/harus masuk)
                     image: splashData[index]["image"]!,
+                    
                   ), //karna dia list jd harus make index
                 ), //untuk memisah dri logic
               ),
             ),
-            Expanded(
+            Expanded( //expended ini mengisi kekosongan yang ada
                 child: 
                 Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +87,7 @@ class _BodyState extends State<Body> {
                       Navigator.push( //untuk menggantikan halaman lain
                         context, 
                         MaterialPageRoute(
-                          builder: (context) => const CataloguScreen())  
+                          builder: (context) => LoginScreen())  
                         );
                     } else {
                       _pageController.animateToPage( //untuk mengatur page viwe
